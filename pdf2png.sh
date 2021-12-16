@@ -17,7 +17,7 @@ pdf2png() {
         exit 1
     elif [ $# -eq 1 ];then
         filePath=$1
-    else 
+    else
         direction=$1
         filePath=$2
     fi
@@ -30,7 +30,7 @@ pdf2png() {
         fileDir=$(cd $fileDir && pwd)
     fi
 
-    local fileName=`basename $1`
+    local fileName=`basename $filePath`
     local filePrefix=${fileName%.pdf}
     local outputFileName="$filePrefix".png
 
@@ -38,7 +38,7 @@ pdf2png() {
     rm -rf $tmpOutDir
     mkdir $tmpOutDir
 
-    cp $1 $tmpOutDir/input.pdf
+    cp "$filePath" $tmpOutDir/input.pdf
 
     pushd $tmpOutDir
     convert -density 150 input.pdf -quality 90 output.png
