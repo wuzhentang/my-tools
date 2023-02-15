@@ -3,9 +3,10 @@
 #set -x
 
 # brew install imagemagick
+# apt install imagemagick
 
 
-usage() {
+pdf2png_usage() {
     echo "pdf2png [v|vertical|h|horizontal]  /path/to/xx.pdf"
 }
 
@@ -13,7 +14,7 @@ pdf2png() {
     local filePath=""
     local direction="vertical"
     if [ $# -lt 1  ];then
-        usage
+        pdf2png_usage
         exit 1
     elif [ $# -eq 1 ];then
         filePath=$1
