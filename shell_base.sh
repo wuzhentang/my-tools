@@ -1,7 +1,6 @@
 #set -x
 set -e
 
-echo "test:$0"
 CURRENT_PATH=$(cd "$(dirname "$0}")";pwd -P )""
 echo current path: $CURRENT_PATH
 MY_BIN=""
