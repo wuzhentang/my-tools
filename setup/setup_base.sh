@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CURRENT_PATH=$(cd "$(dirname "$0}")";pwd -P )""
+
 #get install command
 installCmd() {
     echo "install $@ ..."
@@ -42,14 +44,31 @@ fi
 if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k ];then
     git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 fi
+#TODO: auto add pulgin into .zshrc
 echo "Please add \`zsh-autosuggestions zsh-syntax-highlighting\` into ~/.zshrc plugins"
 
 
 # install Ack
 if [ ! -x "$(command -v ack)" ];then
-    if [ `uname`x = 'Darwin'x ];then
+    if [ $OS  = Mac ];then
         installCmd ack
     else
         installCmd ack-grep
     fi
 fi
+
+# install pidof
+installPidof() {
+    if [ ! command -v pidof ];then
+        if [ $OS = Mac ];then
+            installCmd pidof
+        else
+            installCmd sysvinit-utils
+        fi
+    fi
+}
+installPidof
+
+source  "$CURRENT_PATH/docker.sh"
+source  "$CURRENT_PATH/ssh.sh"
+source  "$CURRENT_PATH/go.sh"

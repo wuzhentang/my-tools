@@ -1,4 +1,4 @@
-set -x
+#set -x
 set -e
 
 echo "test:$0"
@@ -14,6 +14,11 @@ installCmd() {
     elif [ "$(uname)" = "Linux" ]; then
         sudo apt install -y $@
     fi
+}
+
+configEditor() {
+    export VISUAL=vim
+    export EDITOR="$VISUAL"
 }
 
 main() {
@@ -35,14 +40,22 @@ main() {
         echo ""
         return 1
     fi
-    
+
     export PATH=$PATH:$MY_BIN
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MY_BIN/lib64
+    configEditor
+
+    source "$CURRENT_PATH/shell-extends/vim.sh"
+    source "$CURRENT_PATH/shell-extends/git.sh"
+    source "$CURRENT_PATH/shell-extends/android.sh"
+    source "$CURRENT_PATH/shell-extends/autojump.sh"
+    source "$CURRENT_PATH/shell-extends/dev.sh"
+    source "$CURRENT_PATH/shell-extends/docker.sh"
+    source "$CURRENT_PATH/shell-extends/ssh.sh"
 }
 
 #alias showX509Cert="openssl x509  -text  -in "
-#source "$CURRENT_PATH/ssh.sh"
 
 main
 set +e
-set +x
+#set +x
