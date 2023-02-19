@@ -1,5 +1,5 @@
 function setup_ssh_agent() {
-    if [ ! command -v ssh-add ] ; then
+    if [ ! -x $(command -v ssh-add) ] ; then
         printErrorMsg "ssh-add is not available; ssh agent initialize failed!"
         return 1
     fi
