@@ -72,3 +72,4 @@ installPidof
 source  "$CURRENT_PATH/docker.sh"
 source  "$CURRENT_PATH/ssh.sh"
 source  "$CURRENT_PATH/go.sh"
+source  "$CURRENT_PATH/android-dev.sh"
