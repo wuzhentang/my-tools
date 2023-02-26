@@ -18,4 +18,16 @@ addSiteCertToConfig() {
             >> $trust_cert_file_location"
 }
 
+getKenerlConfig() {
+    if [ -f /proc/config.gz ];then
+		zcat /proc/config.gz
+	elif [ -f /boot/config ];then
+		cat /boot/config
+	elif [ -f /boot/config-$(uname -r) ];then
+		cat /boot/config-$(uname -r)
+	else
+		printErrorMsg "kernel config file not found"
+	fi
+}
+
 setupKeyboardMap
